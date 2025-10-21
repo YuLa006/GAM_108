@@ -1,49 +1,71 @@
-# =========================
-# Unity generated files
-# =========================
-[Ll]ibrary/
-[Tt]emp/
-[Oo]bj/
-[Bb]uild/
-[Bb]uilds/
-[Ll]ogs/
-[Mm]emoryCaptures/
+# ==================================================
+# ✅ UNITY 2D PROJECT .GITIGNORE
+# ==================================================
+
+# --- Plastic SCM (Version Control của Unity) ---
+.plastic/
+.plastic.workspace
+.plastic.lock
+
+# --- Unity generated folders ---
+Library/
+Temp/
+Obj/
+Build/
+Builds/
 UserSettings/
-sysinfo.txt
+Logs/
+MemoryCaptures/
+SysInfo/
+Recordings/
 
-# Avoid uploading auto-generated crash & profiler data
-*.stackdump
-*.crash
+# --- Auto-generated files by Unity ---
 *.pidb
-*.mdb
+*.suo
+*.user
+*.userprefs
+*.unityproj
+*.booproj
+*.svd
 *.pdb
+*.mdb
+*.opendb
+*.VC.db
 
-# =========================
-# Visual Studio / Rider / VSCode
-# =========================
+# --- Visual Studio / Rider / IDE related ---
 .vs/
 .vscode/
 .idea/
 *.csproj
 *.unityproj
 *.sln
+*.sln.DotSettings
 *.user
-*.userprefs
-*.pidb
-*.booproj
-*.svd
+*.userosscache
 *.suo
+*.cache
+*.ntvs_analysis.dat
+*.ncb
+*.aps
+*.dbmdl
+*.bak
+*.log
 
-# =========================
-# OS generated files
-# =========================
+# --- OS generated files ---
 .DS_Store
+.DS_Store?
 Thumbs.db
-desktop.ini
+ehthumbs.db
+Icon?
+Desktop.ini
+$RECYCLE.BIN/
 
-# =========================
-# Build results
-# =========================
+# --- Crash and debug logs ---
+*.stackdump
+*.log
+*.dmp
+
+# --- Builds ---
 *.apk
 *.aab
 *.xcodeproj
@@ -51,45 +73,27 @@ desktop.ini
 *.ipa
 *.exe
 *.app
-*.dll
-*.so
+*.msi
 
-# =========================
-# Unity Asset Store / Cache
-# =========================
-Assets/AssetStoreTools*
-Assets/Plugins/Editor/JetBrains*
-Assets/StreamingAssets/aa.meta
-*/AddressablesBuildTEmp/*
-*/AssetBundles/*
-
-# =========================
-# JetBrains Rider cache
-# =========================
-.idea/
-*.iml
-
-# =========================
-# Crashlytics / Firebase
-# =========================
-crashlytics-build.properties
-firebase-debug.log
-
-# =========================
-# Auto-generated lightmaps / navmesh / etc
-# =========================
-[Ll]ightmapSnapshot
-[Ll]ightmap-*
-LightingData.asset
-NavMesh.asset
-OcclusionCullingData.asset
-
-# =========================
-# Other
-# =========================
+# --- Unity Cloud and Analytics files ---
+UnityPackageManager/
+Packages/com.unity.analytics/
+Packages/com.unity.ads/
 *.unitypackage
-*.prefab.unitypackage
-*.bak
-*.orig
+
+# --- Addressables and Cache ---
+/Library/com.unity.addressables/
+/Library/com.unity.shadercache/
+Assets/StreamingAssets/aa/
+
+# --- Misc ---
 *.tmp
-*.temp
+*.bak
+*.swp
+*.lock
+*.orig
+*.old
+
+# ==================================================
+# ✅ END OF FILE
+# ==================================================

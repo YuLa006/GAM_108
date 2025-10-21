@@ -3,13 +3,13 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public SpriteRenderer sr;
-    public Rigidbody2D rb;
-    public GroundCheck G;
-    public Animator at;
-    public Collider2D col;
-    public Transform AtkPoint;
-    public LayerMask enemyLayer;
+    [SerializeField] private SpriteRenderer sr;
+    [SerializeField] private Rigidbody2D rb;
+    [SerializeField] private GroundCheck G;
+    [SerializeField] private Animator at;
+    [SerializeField] private Collider2D col;
+    [SerializeField] private Transform AtkPoint;
+    [SerializeField] private LayerMask enemyLayer;
 
     [Header("Cấu hình nhân vật")]
     [Tooltip("Tốc độ của nhân vật")]
@@ -36,7 +36,6 @@ public class PlayerController : MonoBehaviour
         MovePlayer();
         
     }
-
     private void FixedUpdate()
     {
         rb.linearVelocity = new Vector2(inputH * speed,rb.linearVelocityY) ;
@@ -46,7 +45,7 @@ public class PlayerController : MonoBehaviour
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(AtkPoint.position, AtkRange, enemyLayer);
         foreach (Collider2D hit in hitEnemies)
         {
-            hit.GetComponent<EnemyController>();
+            hit.GetComponent<PigController>();
         }
     }
     private void OnDrawGizmosSelected()
@@ -74,17 +73,20 @@ public class PlayerController : MonoBehaviour
         // lật trái phải 
         if (inputH > 0)
         {
-            sr.flipX = false;
+            transform.localScale = new Vector3(1, 1, 1);
             at.SetBool("isRuning", true);
         }
         else if (inputH < 0)
         {
-            sr.flipX = true;
+            transform.localScale = new Vector3(-1, 1, 1);
             at.SetBool("isRuning", true);
         }
         else
         {
             at.SetBool("isRuning", false);
         }
+
+        //tấn công
+
     }
 }
