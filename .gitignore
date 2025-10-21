@@ -1,0 +1,95 @@
+# =========================
+# Unity generated files
+# =========================
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uild/
+[Bb]uilds/
+[Ll]ogs/
+[Mm]emoryCaptures/
+UserSettings/
+sysinfo.txt
+
+# Avoid uploading auto-generated crash & profiler data
+*.stackdump
+*.crash
+*.pidb
+*.mdb
+*.pdb
+
+# =========================
+# Visual Studio / Rider / VSCode
+# =========================
+.vs/
+.vscode/
+.idea/
+*.csproj
+*.unityproj
+*.sln
+*.user
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+*.suo
+
+# =========================
+# OS generated files
+# =========================
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# =========================
+# Build results
+# =========================
+*.apk
+*.aab
+*.xcodeproj
+*.xcworkspace
+*.ipa
+*.exe
+*.app
+*.dll
+*.so
+
+# =========================
+# Unity Asset Store / Cache
+# =========================
+Assets/AssetStoreTools*
+Assets/Plugins/Editor/JetBrains*
+Assets/StreamingAssets/aa.meta
+*/AddressablesBuildTEmp/*
+*/AssetBundles/*
+
+# =========================
+# JetBrains Rider cache
+# =========================
+.idea/
+*.iml
+
+# =========================
+# Crashlytics / Firebase
+# =========================
+crashlytics-build.properties
+firebase-debug.log
+
+# =========================
+# Auto-generated lightmaps / navmesh / etc
+# =========================
+[Ll]ightmapSnapshot
+[Ll]ightmap-*
+LightingData.asset
+NavMesh.asset
+OcclusionCullingData.asset
+
+# =========================
+# Other
+# =========================
+*.unitypackage
+*.prefab.unitypackage
+*.bak
+*.orig
+*.tmp
+*.temp
