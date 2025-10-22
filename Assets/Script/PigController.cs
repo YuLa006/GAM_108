@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEditor.Rendering;
 using UnityEngine;
 
@@ -11,6 +13,9 @@ public class PigController : MonoBehaviour
 
     public bool isChasing = false;
     public float speedPig;
+    public float health;    
+
+    public bool isDie = false;
 
 
     void Start()
@@ -32,16 +37,32 @@ public class PigController : MonoBehaviour
             Animator.SetBool("isRunning", false);
         }        
     }
-    void takeDamage()
-    {
 
+    // Lấy dame của player, set Dead
+    public void takeDamage(float dame)
+    {
+        health -= dame;
+        if (health <= 0)
+        {
+            health = 0;
+            isDie = true;
+            Animator.SetTrigger("isDie");
+            StartCoroutine(Die());
+        }
+        IEnumerator Die()
+        {
+            yield return new WaitForSeconds(1f);
+            GameObject.Destroy(rg.gameObject);
+        }
     }
-    
+        
+    //Kiểm tra biến chase
     public void SetChasing(bool vaule)
     {
         isChasing = vaule;
     }
 
+    // đuổi theo Player
     private void chasePlayer()
     {
         if (Player == null)
@@ -53,12 +74,13 @@ public class PigController : MonoBehaviour
         Vector2 direction = Player.position - transform.position;
         if(direction.x > 0)
         {
-            transform.localScale = new Vector3(1, 1, 1);    
+            transform.localScale = new Vector3(-1, 1, 1);    
         }
         else if(direction.x < 0){
-            transform.localScale = new Vector3(-1, 1, 1);
-        }
+            transform.localScale = new Vector3(1, 1, 1);
+        }        
         direction.Normalize();
+
         rg.linearVelocity = direction * speedPig;
         Animator.SetBool("isRunning", true);
     }

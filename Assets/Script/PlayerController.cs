@@ -1,5 +1,6 @@
 ﻿using Unity.VisualScripting.Antlr3.Runtime.Tree;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
@@ -23,29 +24,42 @@ public class PlayerController : MonoBehaviour
     [Tooltip("Damage của player")]
     public float atkDamage;
 
+    public bool isAtk = false;
 
     void Start()
     {
         rb = GetComponent <Rigidbody2D>();  
         sr = GetComponent<SpriteRenderer>();     
-        at = GetComponent <Animator>();
+        at = GetComponent <Animator>();        
     }
     void Update()
     {        
         //di chuyển trái phải,nhảy,lật player
         MovePlayer();
+
+        //tấn công
+        if(!isAtk && Input.GetKeyDown(KeyCode.F))
+        {
+            Attack();
+            at.SetTrigger("isAttacking");
+        }
         
     }
     private void FixedUpdate()
     {
         rb.linearVelocity = new Vector2(inputH * speed,rb.linearVelocityY) ;
     }
+
+    private void OnTriggerEnter2D(Collider2D col)
+    {        
+    }
     public void Attack()
     {
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(AtkPoint.position, AtkRange, enemyLayer);
         foreach (Collider2D hit in hitEnemies)
         {
-            hit.GetComponent<PigController>();
+            hit.GetComponent<PigController>().takeDamage(atkDamage);
+            at.SetTrigger("isAttcking");
         }
     }
     private void OnDrawGizmosSelected()
@@ -84,9 +98,6 @@ public class PlayerController : MonoBehaviour
         else
         {
             at.SetBool("isRuning", false);
-        }
-
-        //tấn công
-
+        }        
     }
 }
