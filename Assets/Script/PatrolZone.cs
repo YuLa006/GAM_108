@@ -2,18 +2,7 @@ using UnityEngine;
 
 public class PatrolZone : MonoBehaviour
 {
-    [SerializeField] private PigController pig;
-        
-    
-    void Start()
-    {
-        
-    }
- 
-    void Update()
-    {
-        
-    }
+    [SerializeField] private PigController pig;              
 
     private void OnTriggerEnter2D(Collider2D col)
     {

@@ -1,4 +1,5 @@
-﻿using Unity.VisualScripting.Antlr3.Runtime.Tree;
+﻿using System.Collections;
+using Unity.VisualScripting.Antlr3.Runtime.Tree;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -11,34 +12,42 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Collider2D col;
     [SerializeField] private Transform AtkPoint;
     [SerializeField] private LayerMask enemyLayer;
+    [SerializeField] private UI_Manager UI;
 
     [Header("Cấu hình nhân vật")]
     [Tooltip("Tốc độ của nhân vật")]
-    public float speed;
+    public float speed = 5;
     [Tooltip("Di chuyển trái phải")]
     public float inputH;
     [Tooltip("Tốc độ nhảy")]
-    public float SpeedJump;
+    public float SpeedJump = 12;
     [Tooltip("Bán kính AtkPiont")]
-    public float AtkRange;
+    public float AtkRange = 0.55f;
     [Tooltip("Damage của player")]
-    public float atkDamage;
-
-    public bool isAtk = false;
+    public int atkDamage = 2;
+    public int Health = 5;
+    public int maxHealth = 5;
+    public float AtkTimer = 1.5f;
+    public float AtkCD = 1.5f;
+    
+    public bool isDie = false;  
 
     void Start()
-    {
-        rb = GetComponent <Rigidbody2D>();  
-        sr = GetComponent<SpriteRenderer>();     
-        at = GetComponent <Animator>();        
+    {        
+        //rb = GetComponent <Rigidbody2D>();  
+        //sr = GetComponent<SpriteRenderer>();     
+        //at = GetComponent <Animator>();        
     }
     void Update()
-    {        
+    {
         //di chuyển trái phải,nhảy,lật player
-        MovePlayer();
+        if (!isDie)
+        {
+            MovePlayer();
+        }
 
         //tấn công
-        if(!isAtk && Input.GetKeyDown(KeyCode.F))
+        if(Input.GetKeyDown(KeyCode.F))
         {
             Attack();
             at.SetTrigger("isAttacking");
@@ -59,7 +68,15 @@ public class PlayerController : MonoBehaviour
         foreach (Collider2D hit in hitEnemies)
         {
             hit.GetComponent<PigController>().takeDamage(atkDamage);
+            AtkTimer = AtkCD;
+            StartCoroutine(Attacking());
+            break;
+        }
+
+        IEnumerator Attacking()
+        {
             at.SetTrigger("isAttcking");
+            yield return new WaitForSeconds(1f);
         }
     }
     private void OnDrawGizmosSelected()
@@ -99,5 +116,29 @@ public class PlayerController : MonoBehaviour
         {
             at.SetBool("isRuning", false);
         }        
+    }
+
+    public void TakeDame(int dame)
+    {
+        Health -= dame;        
+        at.SetTrigger("isHit");
+        if(Health <= 0)
+        {
+            Health = 0;
+            isDie = true;
+            at.SetTrigger("isDie");
+            StartCoroutine(Die());
+        }
+        else if (Health > maxHealth)
+        {
+            Health = maxHealth;
+        }
+        UI.UpdateHealth(Health);
+
+        IEnumerator Die()
+        {
+            yield return new WaitForSeconds(0.5f);
+
+        }
     }
 }
