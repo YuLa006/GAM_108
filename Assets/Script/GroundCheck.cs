@@ -4,15 +4,7 @@ using UnityEngine;
 
 public class GroundCheck : MonoBehaviour
 {
-    public bool isGround {  get; set; }
-    void Start()
-    {
-
-    }
-
-    void Update()
-    {
-    }
+    public bool isGround {  get; set; }   
 
     void OnTriggerEnter2D(Collider2D col)
     {

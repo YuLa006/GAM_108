@@ -1,18 +1,19 @@
 ﻿using System.Collections;
+using Unity.VisualScripting;
 using Unity.VisualScripting.Antlr3.Runtime.Tree;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private SpriteRenderer sr;
+    [SerializeField] private Heart_Item Heart_Item;
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private GroundCheck G;
     [SerializeField] private Animator at;
-    [SerializeField] private Collider2D col;
     [SerializeField] private Transform AtkPoint;
     [SerializeField] private LayerMask enemyLayer;
     [SerializeField] private UI_Manager UI;
+    [SerializeField] private GameObject Diamond;
 
     [Header("Cấu hình nhân vật")]
     [Tooltip("Tốc độ của nhân vật")]
@@ -24,22 +25,26 @@ public class PlayerController : MonoBehaviour
     [Tooltip("Bán kính AtkPiont")]
     public float AtkRange = 0.55f;
     [Tooltip("Damage của player")]
+    public int countHealth = 0;
+    public int countDiamond = 0;
     public int atkDamage = 2;
-    public int Health = 5;
+    public int Health = 1;
     public int maxHealth = 5;
     public float AtkTimer = 1.5f;
     public float AtkCD = 1.5f;
-    
-    public bool isDie = false;  
+    public int count;
+
+    public bool isDie = false;
 
     void Start()
-    {        
+    {
         //rb = GetComponent <Rigidbody2D>();  
         //sr = GetComponent<SpriteRenderer>();     
         //at = GetComponent <Animator>();        
     }
     void Update()
     {
+
         //di chuyển trái phải,nhảy,lật player
         if (!isDie)
         {
@@ -47,21 +52,18 @@ public class PlayerController : MonoBehaviour
         }
 
         //tấn công
-        if(Input.GetKeyDown(KeyCode.F))
+        if (Input.GetKeyDown(KeyCode.F))
         {
             Attack();
             at.SetTrigger("isAttacking");
         }
-        
+
     }
     private void FixedUpdate()
     {
-        rb.linearVelocity = new Vector2(inputH * speed,rb.linearVelocityY) ;
+        rb.linearVelocity = new Vector2(inputH * speed, rb.linearVelocityY);
     }
 
-    private void OnTriggerEnter2D(Collider2D col)
-    {        
-    }
     public void Attack()
     {
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(AtkPoint.position, AtkRange, enemyLayer);
@@ -115,21 +117,23 @@ public class PlayerController : MonoBehaviour
         else
         {
             at.SetBool("isRuning", false);
-        }        
+        }
     }
 
     public void TakeDame(int dame)
-    {
-        Health -= dame;        
-        at.SetTrigger("isHit");
-        if(Health <= 0)
+    { 
+        Health -= dame;
+        at.SetTrigger("isHit");     
+
+        if (Health <= 0)
         {
             Health = 0;
             isDie = true;
             at.SetTrigger("isDie");
             StartCoroutine(Die());
         }
-        else if (Health > maxHealth)
+
+        if (Health > maxHealth)
         {
             Health = maxHealth;
         }
@@ -139,6 +143,7 @@ public class PlayerController : MonoBehaviour
         {
             yield return new WaitForSeconds(0.5f);
 
-        }
+        }              
     }
+    
 }
