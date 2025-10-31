@@ -8,6 +8,8 @@ TagManager:
   - Pig
   - Diamond
   - Heart
+  - SawTrap
+  - Door
   layers:
   - Default
   - TransparentFX

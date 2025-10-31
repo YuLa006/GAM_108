@@ -57,6 +57,8 @@ SpriteRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -78,9 +80,10 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 10
+  m_SortingOrder: 11
   m_Sprite: {fileID: 4571226829092849726, guid: 87207d55af4b3554aa2b06351c24364d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -191,18 +194,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Player: {fileID: 0}
-  Animator: {fileID: 0}
-  rg: {fileID: 0}
-  sp: {fileID: 0}
+  Animator: {fileID: 2583455766905630164}
+  rg: {fileID: 2780379927527841427}
   AtkPoint: {fileID: 1460676936764052089}
   PlayerLayer:
     serializedVersion: 2
     m_Bits: 128
-  isChasing: 0
   speedPig: 2
-  health: 30
-  dame: 10
+  health: 3
+  dame: 1
   AtkRange: 0.2
+  AtkCD: 3
+  AtkTimer: 3
+  isChasing: 0
   isDie: 0
 --- !u!1 &3948673612843171757
 GameObject:

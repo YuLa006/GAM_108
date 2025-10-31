@@ -173,4 +173,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 084924e733be806409121341b5fbf8e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Heart_Item
-  count: 0
+  UI: {fileID: 0}
+  Player: {fileID: 0}
+  col: {fileID: 6539716885717235997}
+  Heart: 1
